@@ -25,13 +25,22 @@ namespace MasterMindWPL
         List<string> _code = new List<string>();
         int _attempts;
         private DispatcherTimer _timer = new DispatcherTimer();
+        int _tick = 0;
 
         public MainWindow()
         {
             InitializeComponent();
             _attempts = 0;
             _timer.Interval = TimeSpan.FromSeconds(10);
-            _timer.Tick += _timer.Tick;
+            _timer.Tick += (s,o) =>
+            {
+                _tick++;
+                if (_tick == 10)
+                {
+                    StopCountdown();
+                    _tick = 0;
+                }
+            };
 
             AddColorsToDictionary();
             FillComboBoxes();
@@ -58,6 +67,13 @@ namespace MasterMindWPL
         public void StartCountdown()
         {
             _timer.Start();
+        }
+
+        public void StopCountdown()
+        {
+            _timer.Stop();
+            _attempts += 1;
+            this.Title = $" poging {_attempts}";
         }
 
         public void AddColorsToDictionary()
@@ -120,6 +136,7 @@ namespace MasterMindWPL
         private void btnCheckCode_Click(object sender, RoutedEventArgs e)
         {
             _attempts += 1;
+            this.Title = $" poging {_attempts}";
             StartCountdown();
 
             if (_code[0] == cboColors1.SelectedItem)
