@@ -52,6 +52,9 @@ namespace MasterMindWPL
             }
         }
 
+        /// <summary>
+        /// toggles the debug mode. In debug mode, the color code will be shown.
+        /// </summary>
         public void ToggleDebug()
         {
             if (txtDebug.Visibility == Visibility.Hidden)
@@ -64,11 +67,17 @@ namespace MasterMindWPL
             }
         }
 
+        /// <summary>
+        /// Starts the timer countdown.
+        /// </summary>
         public void StartCountdown()
         {
             _timer.Start();
         }
 
+        /// <summary>
+        /// Brings the timer countdown to a stop.
+        /// </summary>
         public void StopCountdown()
         {
             _timer.Stop();
