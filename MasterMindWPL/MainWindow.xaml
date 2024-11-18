@@ -27,5 +27,6 @@
         <Ellipse Name="ellipseColor3" Grid.Row="1" Grid.Column="2" Margin="50" StrokeThickness="5"></Ellipse>
         <Ellipse Name="ellipseColor4" Grid.Row="1" Grid.Column="3" Margin="50" StrokeThickness="5"></Ellipse>
         <Button Name="btnCheckCode" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="50,70" Click="btnCheckCode_Click">Check code</Button>
+        <TextBox Name="txtDebug" Grid.Row="2" Grid.Column="0" Visibility="Hidden"></TextBox>
     </Grid>
 </Window>

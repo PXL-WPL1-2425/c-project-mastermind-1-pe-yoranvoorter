@@ -23,6 +23,7 @@ namespace MasterMindWPL
         Dictionary<Color, string> _availableColors = new Dictionary<Color, string>();
         List<string> _code = new List<string>();
         int _attempts;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +33,22 @@ namespace MasterMindWPL
             FillComboBoxes();
             GenerateRandomCode();
             this.Title = this.Title + $" poging {_attempts}";
+            foreach (string code in _code)
+            {
+                txtDebug.Text = txtDebug.Text + $" {code}";
+            }
+        }
+
+        public void ToggleDebug()
+        {
+            if (txtDebug.Visibility == Visibility.Hidden)
+            {
+                txtDebug.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                txtDebug.Visibility = Visibility.Hidden;
+            }
         }
 
         public void AddColorsToDictionary()
