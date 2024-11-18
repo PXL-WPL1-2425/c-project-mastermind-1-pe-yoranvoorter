@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MasterMindWPL
 {
@@ -23,11 +24,14 @@ namespace MasterMindWPL
         Dictionary<Color, string> _availableColors = new Dictionary<Color, string>();
         List<string> _code = new List<string>();
         int _attempts;
+        private DispatcherTimer _timer = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
             _attempts = 0;
+            _timer.Interval = TimeSpan.FromSeconds(10);
+            _timer.Tick += _timer.Tick;
 
             AddColorsToDictionary();
             FillComboBoxes();
@@ -51,6 +55,11 @@ namespace MasterMindWPL
             }
         }
 
+        public void StartCountdown()
+        {
+            _timer.Start();
+        }
+
         public void AddColorsToDictionary()
         {
             _availableColors.Clear();
@@ -70,6 +79,7 @@ namespace MasterMindWPL
                 int j = rand.Next(0,4);
                 _code.Add(_availableColors.ElementAt(j).Value);
             }
+            StartCountdown();
         }
 
         public void FillComboBoxes()
@@ -109,6 +119,9 @@ namespace MasterMindWPL
 
         private void btnCheckCode_Click(object sender, RoutedEventArgs e)
         {
+            _attempts += 1;
+            StartCountdown();
+
             if (_code[0] == cboColors1.SelectedItem)
             {
                 ellipseColor1.Stroke = new SolidColorBrush(Colors.DarkRed);
