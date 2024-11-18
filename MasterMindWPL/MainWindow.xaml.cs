@@ -22,16 +22,16 @@ namespace MasterMindWPL
     {
         Dictionary<Color, string> _availableColors = new Dictionary<Color, string>();
         List<string> _code = new List<string>();
+        int _attempts;
         public MainWindow()
         {
             InitializeComponent();
+            _attempts = 0;
+
             AddColorsToDictionary();
             FillComboBoxes();
             GenerateRandomCode();
-            foreach (string color in _code)
-            {
-                this.Title = this.Title + " " + color;
-            }
+            this.Title = this.Title + $" poging {_attempts}";
         }
 
         public void AddColorsToDictionary()
